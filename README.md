@@ -1,5 +1,6 @@
 # ProgramaDeHardware
 Lucas Morás Villarinho
+Pedro Otávio Fogaça
 Gerenciador de Hardware para Laboratórios
 
 ## Levantamento de requisito
