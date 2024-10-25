@@ -14,10 +14,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         Desktop = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        labinA = new javax.swing.JMenuItem();
+        labinB = new javax.swing.JMenuItem();
+        labinC = new javax.swing.JMenuItem();
+        labinD = new javax.swing.JMenuItem();
+        ManutencaoMenu = new javax.swing.JMenu();
+        MenuPeca = new javax.swing.JMenu();
+        menuEqui = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -32,37 +36,65 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGap(0, 422, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Labin A");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu1MouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(jMenu1);
+        jMenu5.setText("Laboratorios");
 
-        jMenu2.setText("Labin B");
-        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu2MouseClicked(evt);
+        labinA.setText("Labin A");
+        labinA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                labinAActionPerformed(evt);
             }
         });
-        jMenuBar1.add(jMenu2);
+        jMenu5.add(labinA);
 
-        jMenu3.setText("Labin C");
-        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu3MouseClicked(evt);
+        labinB.setText("Labin B");
+        labinB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                labinBActionPerformed(evt);
             }
         });
-        jMenuBar1.add(jMenu3);
+        jMenu5.add(labinB);
 
-        jMenu4.setText("Labin D");
-        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu4MouseClicked(evt);
+        labinC.setText("Labin C");
+        labinC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                labinCActionPerformed(evt);
             }
         });
-        jMenuBar1.add(jMenu4);
+        jMenu5.add(labinC);
+
+        labinD.setText("Labin D");
+        labinD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                labinDActionPerformed(evt);
+            }
+        });
+        jMenu5.add(labinD);
+
+        jMenuBar1.add(jMenu5);
+
+        ManutencaoMenu.setText("Manutenção");
+        ManutencaoMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ManutencaoMenuMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(ManutencaoMenu);
+
+        MenuPeca.setText("Peças");
+        MenuPeca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MenuPecaMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(MenuPeca);
+
+        menuEqui.setText("Equipamentos");
+        menuEqui.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuEquiMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(menuEqui);
 
         setJMenuBar(jMenuBar1);
 
@@ -87,37 +119,33 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+    private void labinBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labinBActionPerformed
         
-        TelaLabinA lbA = new TelaLabinA();
-        lbA.setVisible(true);       
-        Desktop.add(lbA);
-        
-    }//GEN-LAST:event_jMenu1MouseClicked
+    }//GEN-LAST:event_labinBActionPerformed
 
-    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
-               
-        TelaLabinB lbB = new TelaLabinB();
-        lbB.setVisible(true);       
-        Desktop.add(lbB);
-        
-    }//GEN-LAST:event_jMenu2MouseClicked
+    private void labinAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labinAActionPerformed
 
-    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
-                
-        TelaLabinC lbC = new TelaLabinC();
-        lbC.setVisible(true);       
-        Desktop.add(lbC);
-        
-    }//GEN-LAST:event_jMenu3MouseClicked
+    }//GEN-LAST:event_labinAActionPerformed
 
-    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+    private void labinCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labinCActionPerformed
  
-        TelaLabinD lbD = new TelaLabinD();
-        lbD.setVisible(true);       
-        Desktop.add(lbD);
+    }//GEN-LAST:event_labinCActionPerformed
+
+    private void labinDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labinDActionPerformed
         
-    }//GEN-LAST:event_jMenu4MouseClicked
+    }//GEN-LAST:event_labinDActionPerformed
+
+    private void ManutencaoMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ManutencaoMenuMouseClicked
+        
+    }//GEN-LAST:event_ManutencaoMenuMouseClicked
+
+    private void MenuPecaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuPecaMouseClicked
+        
+    }//GEN-LAST:event_MenuPecaMouseClicked
+
+    private void menuEquiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuEquiMouseClicked
+        
+    }//GEN-LAST:event_menuEquiMouseClicked
 
     public static void main(String args[]) {
 
@@ -130,10 +158,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Desktop;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu ManutencaoMenu;
+    private javax.swing.JMenu MenuPeca;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem labinA;
+    private javax.swing.JMenuItem labinB;
+    private javax.swing.JMenuItem labinC;
+    private javax.swing.JMenuItem labinD;
+    private javax.swing.JMenu menuEqui;
     // End of variables declaration//GEN-END:variables
 }
