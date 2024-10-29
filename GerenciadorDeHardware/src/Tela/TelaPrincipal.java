@@ -1,7 +1,5 @@
 package Tela;
 
-import java.awt.Desktop;
-
 public class TelaPrincipal extends javax.swing.JFrame {
 
     public TelaPrincipal() {
@@ -121,29 +119,57 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void labinBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labinBActionPerformed
         
+        TelaLabinB lbB = new TelaLabinB();
+        lbB.setVisible(true);
+        Desktop.add(lbB);
+         
     }//GEN-LAST:event_labinBActionPerformed
 
     private void labinAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labinAActionPerformed
-
+        
+        TelaLabinA lbA = new TelaLabinA();
+        lbA.setVisible(true);
+        Desktop.add(lbA);
+        
     }//GEN-LAST:event_labinAActionPerformed
 
     private void labinCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labinCActionPerformed
  
+        TelaLabinC lbC = new TelaLabinC();
+        lbC.setVisible(true);
+        Desktop.add(lbC);
+         
     }//GEN-LAST:event_labinCActionPerformed
 
     private void labinDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labinDActionPerformed
-        
+       
+        TelaLabinD lbD = new TelaLabinD();             
+        lbD.setVisible(true);
+        Desktop.add(lbD);
+         
     }//GEN-LAST:event_labinDActionPerformed
 
     private void ManutencaoMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ManutencaoMenuMouseClicked
         
+        Manutenção mn1 = new Manutenção();
+        mn1.setVisible(true);
+        Desktop.add(mn1);
+         
     }//GEN-LAST:event_ManutencaoMenuMouseClicked
 
     private void MenuPecaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuPecaMouseClicked
         
+        Peças pc1 = new Peças();
+        pc1.setVisible(true);
+        Desktop.add(pc1);
+         
     }//GEN-LAST:event_MenuPecaMouseClicked
 
     private void menuEquiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuEquiMouseClicked
+        
+        TelaEquipamentos eq1 = new TelaEquipamentos();
+        eq1.setVisible(true);
+        Desktop.add(eq1);
         
     }//GEN-LAST:event_menuEquiMouseClicked
 
