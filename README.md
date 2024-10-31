@@ -1,5 +1,4 @@
 # ProgramaDeHardware
-Gerenciador de Hardware para Laboratórios
 
 <table>
   <tr>
@@ -27,6 +26,7 @@ Gerenciador de Hardware para Laboratórios
   </tr>
 </table>
 
+# Gerenciador de Hardware para Laboratórios
 
 
 ## Levantamento de requisito
@@ -77,3 +77,6 @@ MySQL Workbench
 # Considerações Finais
 O sistema "Gerenciador de Hardware para Laboratórios" deve facilitar o controle e o monitoramento das máquinas e peças de hardware, proporcionando maior eficiência na gestão de manutenção e inventário dos laboratórios. Este documento deverá ser revisado periodicamente conforme novas funcionalidades e necessidades sejam identificadas.
 
+# Link para contato profissional
+pffernandezsyt@gmail.com
+lucasmoras63@gmail.com
