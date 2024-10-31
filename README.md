@@ -75,8 +75,7 @@ O sistema deve garantir o controle de acesso por meio de autenticação de usuá
 O sistema deve ter uma interface gráfica baseada em JavaFX ou Swing.
 
 # IDEs/Editores utilizados
-Apache NetBeans
-MySQL Workbench
+Apache NetBeans e MySQL Workbench
 
 # Instruções de Configuração e Execução
 Para executar o projeto, siga os passos abaixo:
