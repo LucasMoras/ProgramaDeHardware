@@ -63,6 +63,11 @@ O sistema deve possuir uma interface intuitiva, facilitando o registro de manute
 # Portabilidade
 O sistema deve ser multiplataforma, funcionando em ambientes Windows, Linux e macOS.
 
+|   WINDOWS     |      LINUX     |    MACOS      |
+|:--------------|:--------------:|--------------:|
+| FUNCIONAL     | FUNCIONAL      | FUNCIONAL     |
+
+
 # Segurança
 O sistema deve garantir o controle de acesso por meio de autenticação de usuário.
 
