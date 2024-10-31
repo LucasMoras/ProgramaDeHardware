@@ -2,6 +2,20 @@
 Lucas Morás Villarinho e Pedro Otávio Fogaça
 Gerenciador de Hardware para Laboratórios
 
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Idade</th>
+    <th>Cidade</th>
+  </tr>
+  <tr>
+    <td>João</td>
+    <td>25</td>
+    <td>São Paulo</td>
+  </tr>
+</table>
+
+
 ## Levantamento de requisito
 
 # Objetivo
@@ -41,6 +55,11 @@ O sistema deve garantir o controle de acesso por meio de autenticação de usuá
 
 # Interface Gráfica
 O sistema deve ter uma interface gráfica baseada em JavaFX ou Swing.
+
+# IDEs/Editores utilizados
+Apache NetBeans
+MySQL Workbench
+
 
 # Considerações Finais
 O sistema "Gerenciador de Hardware para Laboratórios" deve facilitar o controle e o monitoramento das máquinas e peças de hardware, proporcionando maior eficiência na gestão de manutenção e inventário dos laboratórios. Este documento deverá ser revisado periodicamente conforme novas funcionalidades e necessidades sejam identificadas.
