@@ -1,5 +1,4 @@
 # ProgramaDeHardware
-Lucas Morás Villarinho e Pedro Otávio Fogaça
 Gerenciador de Hardware para Laboratórios
 
 <table>
@@ -9,11 +8,25 @@ Gerenciador de Hardware para Laboratórios
     <th>Cidade</th>
   </tr>
   <tr>
-    <td>João</td>
-    <td>25</td>
-    <td>São Paulo</td>
+    <td>Pedro</td>
+    <td>16</td>
+    <td>Sapucaia do Sul</td>
   </tr>
 </table>
+
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Idade</th>
+    <th>Cidade</th>
+  </tr>
+  <tr>
+    <td>Lucas</td>
+    <td>17</td>
+    <td>Sapucaia do Sul</td>
+  </tr>
+</table>
+
 
 
 ## Levantamento de requisito
