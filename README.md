@@ -8,7 +8,7 @@ Gerenciador de Hardware para Laboratórios
     <th>Cidade</th>
   </tr>
   <tr>
-    <td>Pedro</td>
+    <td>Pedro Otávio</td>
     <td>16</td>
     <td>Sapucaia do Sul</td>
   </tr>
@@ -21,7 +21,7 @@ Gerenciador de Hardware para Laboratórios
     <th>Cidade</th>
   </tr>
   <tr>
-    <td>Lucas</td>
+    <td>Lucas Moras</td>
     <td>17</td>
     <td>Sapucaia do Sul</td>
   </tr>
