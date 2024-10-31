@@ -1,6 +1,33 @@
 # ProgramaDeHardware
-Lucas Morás Villarinho e Pedro Otávio Fogaça
-Gerenciador de Hardware para Laboratórios
+
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Idade</th>
+    <th>Cidade</th>
+  </tr>
+  <tr>
+    <td>Pedro Otávio</td>
+    <td>16</td>
+    <td>Sapucaia do Sul</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Idade</th>
+    <th>Cidade</th>
+  </tr>
+  <tr>
+    <td>Lucas Moras</td>
+    <td>17</td>
+    <td>Sapucaia do Sul</td>
+  </tr>
+</table>
+
+# Gerenciador de Hardware para Laboratórios
+
 
 ## Levantamento de requisito
 
@@ -36,12 +63,36 @@ O sistema deve possuir uma interface intuitiva, facilitando o registro de manute
 # Portabilidade
 O sistema deve ser multiplataforma, funcionando em ambientes Windows, Linux e macOS.
 
+|   WINDOWS     |      LINUX     |    MACOS      |
+|:--------------|:--------------:|--------------:|
+| FUNCIONAL     | FUNCIONAL      | FUNCIONAL     |
+
+
 # Segurança
 O sistema deve garantir o controle de acesso por meio de autenticação de usuário.
 
 # Interface Gráfica
 O sistema deve ter uma interface gráfica baseada em JavaFX ou Swing.
 
+# IDEs/Editores utilizados
+Apache NetBeans e MySQL Workbench
+
+# Instruções de Configuração e Execução
+Para executar o projeto, siga os passos abaixo:
+
+1= clone o repositorio;
+
+2= abra seu Apache NetBeans 22;
+
+3= abra a pasta do projeto.
+
+# Tecnologias Utilizadas
+Java, Apache NetBeans, MySql, Workbench
+
 # Considerações Finais
 O sistema "Gerenciador de Hardware para Laboratórios" deve facilitar o controle e o monitoramento das máquinas e peças de hardware, proporcionando maior eficiência na gestão de manutenção e inventário dos laboratórios. Este documento deverá ser revisado periodicamente conforme novas funcionalidades e necessidades sejam identificadas.
 
+# Link para contato profissional
+pffernandezsyt@gmail.com
+
+lucasmoras63@gmail.com
