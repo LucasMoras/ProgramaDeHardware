@@ -80,8 +80,11 @@ MySQL Workbench
 
 # Instruções de Configuração e Execução
 Para executar o projeto, siga os passos abaixo:
+
 1= clone o repositorio;
+
 2= abra seu Apache NetBeans 22;
+
 3= abra a pasta do projeto.
 
 
