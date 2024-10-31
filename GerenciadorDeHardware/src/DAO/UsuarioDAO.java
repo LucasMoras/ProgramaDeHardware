@@ -13,7 +13,7 @@ public class UsuarioDAO {
     ResultSet rs = null;
 
     public void logar(UsuarioDTO objusuarioDTO) {
-        String sql = "select * from tb_usuarios where login = ? and senha = ?";
+        String sql = "select * from Usuario where nome = ? and senha = ?";
         conexao = ConexaoDAO.conector();
 
         try {
