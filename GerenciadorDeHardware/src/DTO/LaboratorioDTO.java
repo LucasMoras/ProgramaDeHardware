@@ -2,11 +2,13 @@ package DTO;
 
 public class LaboratorioDTO {
 
-    public LaboratorioDTO(String string, String string1) {
+    public LaboratorioDTO(String string) {
     }
+
+
     private int id;
     private String nome;
-    private String localizacao;
+
 
     public int getId() {
         return id;
@@ -22,13 +24,5 @@ public class LaboratorioDTO {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getLocalizacao() {
-        return localizacao;
-    }
-
-    public void setLocalizacao(String localizacao) {
-        this.localizacao = localizacao;
     }
 }

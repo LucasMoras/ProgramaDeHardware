@@ -8,13 +8,12 @@ import java.util.List;
 public class LaboratorioDAO {
 
     public void cadastrarLaboratorio(LaboratorioDTO laboratorio) throws SQLException {
-        String sql = "INSERT INTO Laboratorio (nome, localizacao) VALUES (?, ?)";
+        String sql = "INSERT INTO Laboratorio (nome) VALUES (?)";
 
         try (Connection conn = ConexaoDAO.conector();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, laboratorio.getNome());
-            stmt.setString(2, laboratorio.getLocalizacao());
             stmt.executeUpdate();
         }
     }
@@ -28,12 +27,11 @@ public class LaboratorioDAO {
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                LaboratorioDTO laboratorio = new LaboratorioDTO(
-                        rs.getString("nome"),
-                        rs.getString("localizacao")
+                LaboratorioDTO lab1 = new LaboratorioDTO(
+                        rs.getString("nome")
                 );
-                laboratorio.setId(rs.getInt("id"));
-                laboratorios.add(laboratorio);
+                lab1.setId(rs.getInt("id"));
+                laboratorios.add(lab1);
             }
         }
         return laboratorios;
