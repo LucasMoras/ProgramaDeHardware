@@ -2,10 +2,6 @@ package DTO;
 
 public class LaboratorioDTO {
 
-    public LaboratorioDTO(String string) {
-    }
-
-
     private int id;
     private String nome;
 

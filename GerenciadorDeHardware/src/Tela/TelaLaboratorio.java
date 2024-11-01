@@ -1,7 +1,11 @@
 package Tela;
 
 import DAO.LaboratorioDAO;
+import DAO.UsuarioDAO;
 import DTO.LaboratorioDTO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class TelaLaboratorio extends javax.swing.JFrame {
@@ -63,13 +67,18 @@ public class TelaLaboratorio extends javax.swing.JFrame {
 
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
          
-        LaboratorioDTO lab1 = new LaboratorioDTO(txtNome.getText());
-                try {
-                    new LaboratorioDAO().cadastrarLaboratorio(lab1);
-                    JOptionPane.showMessageDialog(null, "Laboratório cadastrado com sucesso!");
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Erro ao cadastrar laboratório." + ex);
-                }
+        String nome = txtNome.getText();
+
+        LaboratorioDTO labDTO = new LaboratorioDTO();
+        labDTO.setNome(nome);
+        LaboratorioDAO labDAO = new LaboratorioDAO();
+        
+        try {
+            labDAO.cadastrarLaboratorio(labDTO);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaLaboratorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_bntSalvarActionPerformed
 
     public static void main(String args[]) {
