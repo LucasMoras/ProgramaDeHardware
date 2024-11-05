@@ -12,13 +12,13 @@ public class TelaManutencao extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JTextField();
-        cmStatus = new javax.swing.JComboBox<>();
+        cmTipo = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         cmNomeMaquina = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         bntSalvar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        txtTecnico = new javax.swing.JTextField();
+        cbUsu = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -30,10 +30,10 @@ public class TelaManutencao extends javax.swing.JFrame {
             }
         });
 
-        cmStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Preventiva", "Corretiva" }));
-        cmStatus.addActionListener(new java.awt.event.ActionListener() {
+        cmTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Preventiva", "Corretiva" }));
+        cmTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmStatusActionPerformed(evt);
+                cmTipoActionPerformed(evt);
             }
         });
 
@@ -50,6 +50,12 @@ public class TelaManutencao extends javax.swing.JFrame {
 
         jLabel4.setText("Técnico");
 
+        cbUsu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbUsuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -58,41 +64,49 @@ public class TelaManutencao extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(txtTecnico)
                     .addComponent(cmNomeMaquina, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmStatus, 0, 435, Short.MAX_VALUE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addComponent(cmTipo, 0, 435, Short.MAX_VALUE)
+                    .addComponent(cbUsu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(184, 184, 184)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(189, 189, 189)
+                        .addComponent(jLabel4)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(187, Short.MAX_VALUE)
                 .addComponent(bntSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(178, 178, 178))
+                .addGap(185, 185, 185))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbUsu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(cmTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addGap(4, 4, 4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmNomeMaquina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(txtDescricao)
+                .addGap(32, 32, 32)
                 .addComponent(bntSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addContainerGap())
         );
 
         pack();
@@ -100,16 +114,20 @@ public class TelaManutencao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescricaoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtDescricaoActionPerformed
 
-    private void cmStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmStatusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmStatusActionPerformed
+    private void cmTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmTipoActionPerformed
+        
+    }//GEN-LAST:event_cmTipoActionPerformed
 
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
         
     }//GEN-LAST:event_bntSalvarActionPerformed
+
+    private void cbUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUsuActionPerformed
+        
+    }//GEN-LAST:event_cbUsuActionPerformed
 
     public static void main(String args[]) {
 
@@ -122,13 +140,13 @@ public class TelaManutencao extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntSalvar;
+    private javax.swing.JComboBox<String> cbUsu;
     private javax.swing.JComboBox<String> cmNomeMaquina;
-    private javax.swing.JComboBox<String> cmStatus;
+    private javax.swing.JComboBox<String> cmTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField txtDescricao;
-    private javax.swing.JTextField txtTecnico;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,9 +8,8 @@ public class LaboratorioDAO {
 
     Connection conexao = null;
     PreparedStatement pst = null;
-    ResultSet rs = null;
     
-    public void cadastrarLaboratorio(LaboratorioDTO lab1) throws SQLException {
+    public void cadastrarLaboratorio(LaboratorioDTO lab1){
         String sql = "INSERT INTO Laboratorio (nome)" + "VALUES (?)";
         conexao = ConexaoDAO.conector();
         try {
@@ -28,4 +27,16 @@ public class LaboratorioDAO {
         }
     }
 }
+    
+
+
+
+            
+                       
+
+         
+        
+    
+
+
 

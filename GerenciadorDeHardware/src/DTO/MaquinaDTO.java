@@ -2,14 +2,38 @@ package DTO;
 
 public class MaquinaDTO {
 
-    public MaquinaDTO(int aInt, String string, int aInt1, int aInt2, String string1) {
-    }
     private int id;
-    private int laboratorioId;
+    private String Nome;
+    private String laboratorioNome;
     private String cpu;
-    private int ram;
-    private int armazenamento;
-    private String status;
+    private String ram;
+    private String armazenamento;
+    private String Status;
+
+    public String getLaboratorioNome() {
+        return laboratorioNome;
+    }
+
+    public void setLaboratorioNome(String laboratorioNome) {
+        this.laboratorioNome = laboratorioNome;
+    }
+
+    
+    public String getNome() {
+        return Nome;
+    }
+
+    public void setNome(String Nome) {
+        this.Nome = Nome;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String Status) {
+        this.Status = Status;
+    }
 
     public int getId() {
         return id;
@@ -17,14 +41,6 @@ public class MaquinaDTO {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getLaboratorioId() {
-        return laboratorioId;
-    }
-
-    public void setLaboratorioId(int laboratorioId) {
-        this.laboratorioId = laboratorioId;
     }
 
     public String getCpu() {
@@ -35,27 +51,19 @@ public class MaquinaDTO {
         this.cpu = cpu;
     }
 
-    public int getRam() {
+    public String getRam() {
         return ram;
     }
 
-    public void setRam(int ram) {
+    public void setRam(String ram) {
         this.ram = ram;
     }
 
-    public int getArmazenamento() {
+    public String getArmazenamento() {
         return armazenamento;
     }
 
-    public void setArmazenamento(int armazenamento) {
+    public void setArmazenamento(String armazenamento) {
         this.armazenamento = armazenamento;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 }

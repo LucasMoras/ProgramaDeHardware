@@ -1,51 +1,62 @@
 package DAO;
 
 import DTO.MaquinaDTO;
+import Tela.TelaMaquina;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 public class MaquinaDAO {
 
-    public void cadastrarMaquina(MaquinaDTO maquina) throws SQLException {
-        String sql = "INSERT INTO Maquina (laboratorio_id, cpu, ram, armazenamento, status) VALUES (?, ?, ?, ?, ?)";
-
-        try (Connection conn = ConexaoDAO.conector();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, maquina.getLaboratorioId());
-            stmt.setString(2, maquina.getCpu());
-            stmt.setInt(3, maquina.getRam());
-            stmt.setInt(4, maquina.getArmazenamento());
-            stmt.setString(5, maquina.getStatus());
-            stmt.executeUpdate();
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    
+    public void cadastrarMaquina(MaquinaDTO maquina){
+        String sql = "INSERT INTO Maquina (nome, laboratorioNome, processador, ram, armazenamento, statuss) VALUES (?, ?, ?, ?, ?, ?)";
+        conexao = ConexaoDAO.conector();
+        
+        try {          
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, maquina.getNome());
+            pst.setString(2, maquina.getLaboratorioNome());
+            pst.setString(3, maquina.getCpu());
+            pst.setString(4, maquina.getRam());
+            pst.setString(5, maquina.getArmazenamento());
+            pst.setString(6, maquina.getStatus());
+            pst.executeUpdate();  
+            
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e);   
         }
     }
+    
+        public void pesquisar(MaquinaDTO maquina) {
+        String sql = "select * from Maquina where nome = ?";
+        conexao = ConexaoDAO.conector();
 
-    public List<MaquinaDTO> listarMaquinas() throws SQLException {
-        List<MaquinaDTO> maquinas = new ArrayList<>();
-        String sql = "SELECT * FROM Maquina";
-
-        try (Connection conn = ConexaoDAO.conector();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                MaquinaDTO maquina = new MaquinaDTO(
-                    rs.getInt("laboratorio_id"),
-                    rs.getString("cpu"),
-                    rs.getInt("ram"),
-                    rs.getInt("armazenamento"),
-                    rs.getString("status")
-                );
-                maquina.setId(rs.getInt("id"));
-                maquinas.add(maquina);
+        try {
+            pst = conexao.prepareStatement(sql);                      
+            pst.setString(1, maquina.getNome());        
+            rs = pst.executeQuery();
+            
+            if (rs.next()) {
+                TelaMaquina.txtNome.setText(rs.getString(1));
+                TelaMaquina.txtCPU.setText(rs.getString(2));
+                TelaMaquina.txtRAM.setText(rs.getString(3));
+                TelaMaquina.txtROM.setText(rs.getString(4));
+                TelaMaquina.cbLabin.setSelectedItem(rs.getString(5));
+                TelaMaquina.cbStatus.setSelectedItem(rs.getString(6));
+                conexao.close();
+            } else {
+                JOptionPane.showMessageDialog(null, "Maquina não cadastrada!");
             }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, " Método Pesquisar" + e);
         }
-        return maquinas;
     }
 }
 
