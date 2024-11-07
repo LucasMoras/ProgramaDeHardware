@@ -3,13 +3,26 @@ package Tela;
 
 import DAO.MaquinaDAO;
 import DTO.MaquinaDTO;
+import java.sql.ResultSet;
 
 public class TelaMaquina extends javax.swing.JFrame {
 
     public TelaMaquina() {
         initComponents();
+        ResultSet rs = null;
     }
-
+    public void colocarDadosCB(){
+       try{
+           MaquinaDAO maqDAO = new MaquinaDAO();
+           rs = maqDAO.listarLabins();
+           
+           while (rs.next()){
+               
+           }
+       }catch (erro){
+           
+       } 
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -48,6 +61,7 @@ public class TelaMaquina extends javax.swing.JFrame {
 
         jLabel4.setText("Nome da maquina");
 
+        cbLabin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
         cbLabin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbLabinActionPerformed(evt);
@@ -97,7 +111,12 @@ public class TelaMaquina extends javax.swing.JFrame {
 
         jLabel5.setText("Status");
 
-        cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Funcional", "Com problema", "Em manutenção" }));
+        cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Funcionando", "Fora de uso", "Em manutenção" }));
+        cbStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStatusActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -200,8 +219,9 @@ public class TelaMaquina extends javax.swing.JFrame {
         String CPU = txtCPU.getText();
         String RAM = txtRAM.getText();
         String ROM = txtROM.getText();
-        String Labin = cbLabin.getSelectedItem().toString();
         String Status = cbStatus.getSelectedItem().toString();
+        String Labin = cbLabin.getSelectedItem().toString();
+        
 
         MaquinaDTO maq1 = new MaquinaDTO();
         maq1.setNome(Nome);
@@ -209,7 +229,7 @@ public class TelaMaquina extends javax.swing.JFrame {
         maq1.setRam(RAM);
         maq1.setArmazenamento(ROM);
         maq1.setStatus(Status);
-        maq1.setLaboratorioNome(Labin);
+        maq1.setLaboratorio_id(Labin);
         
         MaquinaDAO maq2 = new MaquinaDAO();
         maq2.cadastrarMaquina(maq1);
@@ -233,23 +253,34 @@ public class TelaMaquina extends javax.swing.JFrame {
     }//GEN-LAST:event_cbLabinActionPerformed
 
     private void bntEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarActionPerformed
-    
+        
     }//GEN-LAST:event_bntEditarActionPerformed
 
     private void bntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirActionPerformed
+            
+        String nome = txtNome.getText();
+        MaquinaDTO maqDTO = new MaquinaDTO();
+        maqDTO.setNome(nome);
+        
+        MaquinaDAO maqDAO = new MaquinaDAO();
+        maqDAO.deletar(maqDTO);
         
     }//GEN-LAST:event_bntExcluirActionPerformed
 
     private void bntPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntPesquisarActionPerformed
        
         MaquinaDTO maq1 = new MaquinaDTO();        
-        String nome = maq1.getNome();
+        String nome = txtNome.getText();
         maq1.setNome(nome);
         
         MaquinaDAO maq = new MaquinaDAO();       
         maq.pesquisar(maq1);
             
     }//GEN-LAST:event_bntPesquisarActionPerformed
+
+    private void cbStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStatusActionPerformed
+    
+    }//GEN-LAST:event_cbStatusActionPerformed
 
     public static void main(String args[]) {
 
