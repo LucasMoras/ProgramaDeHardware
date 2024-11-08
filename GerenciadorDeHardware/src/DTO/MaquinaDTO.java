@@ -4,18 +4,18 @@ public class MaquinaDTO {
 
     private int id;
     private String Nome;
-    private String laboratorio_id;
+    private String laboratorioNome;
     private String cpu;
     private String ram;
     private String armazenamento;
     private String Status;
 
-    public String getLaboratorio_id() {
-        return laboratorio_id;
+    public String getLaboratorioNome() {
+        return laboratorioNome;
     }
 
-    public void setLaboratorio_id(String laboratorio_id) {
-        this.laboratorio_id = laboratorio_id;
+    public void setLaboratorioNome(String laboratorioNome) {
+        this.laboratorioNome = laboratorioNome;
     }
     
     public String getNome() {

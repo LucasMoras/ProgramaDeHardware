@@ -1,17 +1,22 @@
 package DTO;
 
-import java.util.Date;
 
 public class ManutencaoDTO {
 
-    public ManutencaoDTO(int aInt, String string, String string1, Date date) {
-    }
     private int id;
-    private int maquinaId;
+    private String TecnicoNome;
+    private String maquinaNome;
     private String tipo;
     private String descricao;
-    private Date data;
 
+    public String getTecnicoNome() {
+        return TecnicoNome;
+    }
+
+    public void setTecnicoNome(String TecnicoNome) {
+        this.TecnicoNome = TecnicoNome;
+    }
+    
     public int getId() {
         return id;
     }
@@ -20,13 +25,14 @@ public class ManutencaoDTO {
         this.id = id;
     }
 
-    public int getMaquinaId() {
-        return maquinaId;
+    public String getMaquinaNome() {
+        return maquinaNome;
     }
 
-    public void setMaquinaId(int maquinaId) {
-        this.maquinaId = maquinaId;
+    public void setMaquinaNome(String maquinaNome) {
+        this.maquinaNome = maquinaNome;
     }
+
 
     public String getTipo() {
         return tipo;
@@ -42,15 +48,5 @@ public class ManutencaoDTO {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
-    }
-    
-    
+    }   
 }

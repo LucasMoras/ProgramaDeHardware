@@ -1,5 +1,8 @@
 package Tela;
 
+import DAO.ManutencaoDAO;
+import DTO.ManutencaoDTO;
+
 public class TelaManutencao extends javax.swing.JFrame {
 
     public TelaManutencao() {
@@ -12,13 +15,13 @@ public class TelaManutencao extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JTextField();
-        cmTipo = new javax.swing.JComboBox<>();
+        cbTipo = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        cmNomeMaquina = new javax.swing.JComboBox<>();
+        cbNomeMaq = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         bntSalvar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        cbUsu = new javax.swing.JComboBox<>();
+        cbNomeTec = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -30,10 +33,10 @@ public class TelaManutencao extends javax.swing.JFrame {
             }
         });
 
-        cmTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Preventiva", "Corretiva" }));
-        cmTipo.addActionListener(new java.awt.event.ActionListener() {
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Preventiva", "Corretiva" }));
+        cbTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmTipoActionPerformed(evt);
+                cbTipoActionPerformed(evt);
             }
         });
 
@@ -50,9 +53,9 @@ public class TelaManutencao extends javax.swing.JFrame {
 
         jLabel4.setText("Técnico");
 
-        cbUsu.addActionListener(new java.awt.event.ActionListener() {
+        cbNomeTec.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbUsuActionPerformed(evt);
+                cbNomeTecActionPerformed(evt);
             }
         });
 
@@ -64,9 +67,9 @@ public class TelaManutencao extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
-                    .addComponent(cmNomeMaquina, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmTipo, 0, 435, Short.MAX_VALUE)
-                    .addComponent(cbUsu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbNomeMaq, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbTipo, 0, 435, Short.MAX_VALUE)
+                    .addComponent(cbNomeTec, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(184, 184, 184)
                         .addComponent(jLabel1))
@@ -91,15 +94,15 @@ public class TelaManutencao extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbUsu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbNomeTec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmNomeMaquina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbNomeMaq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -117,17 +120,30 @@ public class TelaManutencao extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtDescricaoActionPerformed
 
-    private void cmTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmTipoActionPerformed
+    private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
         
-    }//GEN-LAST:event_cmTipoActionPerformed
+    }//GEN-LAST:event_cbTipoActionPerformed
 
     private void bntSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarActionPerformed
+    
+        String NomeTec = cbNomeTec.getSelectedItem().toString();
+        String Descricao = txtDescricao.getText();
+        String Tipo = cbTipo.getSelectedItem().toString();
+        String NomeMaq = cbNomeMaq.getSelectedItem().toString();
+
+        ManutencaoDTO man1 = new ManutencaoDTO();
+        man1.setTecnicoNome(NomeTec);
+        man1.setDescricao(Descricao);
+        man1.setTipo(Tipo);
+        man1.setMaquinaNome(NomeMaq);
         
+        ManutencaoDAO man2 = new ManutencaoDAO();
+        man2.cadastrarManutencao(man1);
     }//GEN-LAST:event_bntSalvarActionPerformed
 
-    private void cbUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUsuActionPerformed
+    private void cbNomeTecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbNomeTecActionPerformed
         
-    }//GEN-LAST:event_cbUsuActionPerformed
+    }//GEN-LAST:event_cbNomeTecActionPerformed
 
     public static void main(String args[]) {
 
@@ -140,9 +156,9 @@ public class TelaManutencao extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntSalvar;
-    private javax.swing.JComboBox<String> cbUsu;
-    private javax.swing.JComboBox<String> cmNomeMaquina;
-    private javax.swing.JComboBox<String> cmTipo;
+    private javax.swing.JComboBox<String> cbNomeMaq;
+    private javax.swing.JComboBox<String> cbNomeTec;
+    private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

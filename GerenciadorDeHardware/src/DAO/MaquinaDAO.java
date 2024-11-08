@@ -1,12 +1,9 @@
 package DAO;
 
+import java.sql.*;
 import DTO.MaquinaDTO;
 import Tela.TelaMaquina;
 import java.awt.HeadlessException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class MaquinaDAO {
@@ -16,18 +13,18 @@ public class MaquinaDAO {
     ResultSet rs = null;
 
     public void cadastrarMaquina(MaquinaDTO maquina) {
-        String sql = "INSERT INTO Maquina (nome, laboratorio_id, processador, ram, armazenamento, statuss) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Maquina (nome, LaboratorioNome, processador, ram, armazenamento, statuss) VALUES ( ?, ?, ?, ?, ?, ?)";
         conexao = ConexaoDAO.conector();
 
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, maquina.getNome());
-            pst.setString(2, maquina.getLaboratorio_id());
+            pst.setString(2,maquina.getLaboratorioNome());
             pst.setString(3, maquina.getCpu());
             pst.setString(4, maquina.getRam());
             pst.setString(5, maquina.getArmazenamento());
             pst.setString(6, maquina.getStatus());
-
+            System.out.println(pst);
             int add = pst.executeUpdate();
             if (add > 0) {
 
@@ -36,25 +33,27 @@ public class MaquinaDAO {
                 JOptionPane.showMessageDialog(null, "Maquina inserida com sucesso! ");
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "cadastrar"+ e.getMessage());
         }
     }
     
-    public void listarLabins(){
+    public ResultSet listarLabins(){
+        
        String sql = "select nome from laboratorio";
        conexao = ConexaoDAO.conector(); 
        
-        try {
-            
+        try {            
             pst = conexao.prepareStatement(sql);
-            pst.executeQuery();
+            rs = pst.executeQuery();
             
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, erro);
+            JOptionPane.showMessageDialog(null, "hum"+ erro.getMessage());
         }
+        return rs;
     }
     
     public void pesquisar(MaquinaDTO maquina) {
+        
         String sql = "select * from Maquina where nome = ?";
         conexao = ConexaoDAO.conector();
 
