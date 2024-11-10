@@ -1,0 +1,55 @@
+CREATE DATABASE GerenciamentoLaboratorios;
+
+USE GerenciamentoLaboratorios;
+
+CREATE TABLE Laboratorio (
+id INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Maquina (
+id INT PRIMARY KEY AUTO_INCREMENT,
+nome varchar(50),
+laboratorioNome varchar(50),
+processador VARCHAR(50),
+ram varchar(50),
+armazenamento varchar(50),
+statuss ENUM('Funcionando', 'Em manutenção', 'Fora de uso')
+);
+
+CREATE TABLE Manutencao (
+id INT PRIMARY KEY AUTO_INCREMENT,
+maquinaNome varchar(50),
+tecnicoNome varchar(50),
+tipo ENUM('preventiva', 'corretiva'),
+descricao TEXT
+);
+
+CREATE TABLE Usuario (
+id INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(50),
+senha VARCHAR(50),
+perfil ENUM('tecnico', 'administrador')
+);
+
+insert into Usuario(id, nome, senha, perfil)
+values(1, 'root', '123','administrador');
+
+SELECT 
+    u.nome AS nome_tecnico,            
+    ma.nome AS nome_maquina,           
+    ma.processador AS processador,     
+    ma.ram AS ram,                     
+    ma.armazenamento AS armazenamento, 
+    l.nome AS nome_laboratorio,        
+    ma.statuss AS status_maquina,      
+    m.tipo AS tipo_manutencao,         
+    m.descricao AS descricao_manutencao 
+FROM 
+    Manutencao m
+INNER JOIN 
+    Maquina ma ON m.maquinaNome = ma.nome
+INNER JOIN 
+    Usuario u ON m.tecnicoNome = u.nome
+INNER JOIN 
+    Laboratorio l ON ma.laboratorioNome = l.nome;

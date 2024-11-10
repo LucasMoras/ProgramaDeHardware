@@ -19,12 +19,12 @@ public class MaquinaDAO {
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, maquina.getNome());
-            pst.setString(2,maquina.getLaboratorioNome());
+            pst.setString(2, maquina.getLaboratorioNome());
             pst.setString(3, maquina.getCpu());
             pst.setString(4, maquina.getRam());
             pst.setString(5, maquina.getArmazenamento());
             pst.setString(6, maquina.getStatus());
-            System.out.println(pst);
+
             int add = pst.executeUpdate();
             if (add > 0) {
 
@@ -33,27 +33,52 @@ public class MaquinaDAO {
                 JOptionPane.showMessageDialog(null, "Maquina inserida com sucesso! ");
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "cadastrar"+ e.getMessage());
+            JOptionPane.showMessageDialog(null, "cadastrar" + e.getMessage());
         }
     }
-    
-    public ResultSet listarLabins(){
-        
-       String sql = "select nome from laboratorio";
-       conexao = ConexaoDAO.conector(); 
-       
-        try {            
+
+    public void editar(MaquinaDTO maq1) {
+        String sql = "update Maquina set nome = ?, processador = ?, ram = ?, armazenamento = ?, laboratorioNome = ?, statuss = ? where id = ?";
+        conexao = ConexaoDAO.conector();
+        try {
+
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, maq1.getNome());
+            pst.setString(2, maq1.getCpu());
+            pst.setString(3, maq1.getRam());
+            pst.setString(4, maq1.getArmazenamento());
+            pst.setString(5, maq1.getLaboratorioNome());
+            pst.setString(6, maq1.getStatus());
+            pst.setInt(7, maq1.getId());
+            int add = pst.executeUpdate();
+
+            if (add > 0) {
+                JOptionPane.showMessageDialog(null, "Maquina editada com sucesso!");
+                conexao.close();
+                limparCampos();
+            }
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, " Método editar " + erro);
+        }
+    }
+
+    public ResultSet listarLabins() {
+
+        String sql = "select nome from laboratorio";
+        conexao = ConexaoDAO.conector();
+
+        try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
-            
+
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "hum"+ erro.getMessage());
+            JOptionPane.showMessageDialog(null, "hum" + erro.getMessage());
         }
         return rs;
     }
-    
+
     public void pesquisar(MaquinaDTO maquina) {
-        
+
         String sql = "select * from Maquina where nome = ?";
         conexao = ConexaoDAO.conector();
 
@@ -63,12 +88,13 @@ public class MaquinaDAO {
             rs = pst.executeQuery();
 
             if (rs.next()) {
-                TelaMaquina.txtNome.setText(rs.getString(1));
-                TelaMaquina.txtCPU.setText(rs.getString(2));
-                TelaMaquina.txtRAM.setText(rs.getString(3));
-                TelaMaquina.txtROM.setText(rs.getString(4));
-                TelaMaquina.cbLabin.setSelectedItem(rs.getString(5));
-                TelaMaquina.cbStatus.setSelectedItem(rs.getString(6));
+                TelaMaquina.txtNome.setText(rs.getString("nome"));
+                TelaMaquina.txtCPU.setText(rs.getString("processador"));
+                TelaMaquina.txtRAM.setText(rs.getString("ram"));
+                TelaMaquina.txtROM.setText(rs.getString("armazenamento"));
+                TelaMaquina.cbLabin.setSelectedItem(rs.getString("laboratorioNome"));
+                TelaMaquina.cbStatus.setSelectedItem(rs.getString("statuss"));
+                TelaMaquina.txtId.setText(rs.getString("id"));
                 conexao.close();
             } else {
                 JOptionPane.showMessageDialog(null, "Maquina não cadastrada!");
@@ -102,7 +128,8 @@ public class MaquinaDAO {
         TelaMaquina.txtCPU.setText(null);
         TelaMaquina.txtRAM.setText(null);
         TelaMaquina.txtROM.setText(null);
-        TelaMaquina.cbLabin.setSelectedItem(1);
-        TelaMaquina.cbStatus.setSelectedItem(1);
+        TelaMaquina.cbLabin.setSelectedItem("Selecione");
+        TelaMaquina.cbStatus.setSelectedItem("Selecione");
+        TelaMaquina.txtId.setText(null);
     }
 }

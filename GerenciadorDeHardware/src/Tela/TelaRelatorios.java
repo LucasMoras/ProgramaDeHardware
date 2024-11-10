@@ -1,9 +1,12 @@
 package Tela;
 
+import DAO.RelatorioDAO;
+
 public class TelaRelatorios extends javax.swing.JFrame {
 
     public TelaRelatorios() {
         initComponents();
+        preencherTabelaRelatorios();
     }
 
     @SuppressWarnings("unchecked")
@@ -20,17 +23,18 @@ public class TelaRelatorios extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Técnico", "Maquina", "Laboratório", "Status", "Tipo de manutenção", "Descrição"
+                "Técnico", "Maquina", "CPU", "RAM", "ROM", "Laboratório", "Status", "Tipo de manutenção", "Descrição"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Long.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Long.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
+        tbRelatorio.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane1.setViewportView(tbRelatorio);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -39,15 +43,15 @@ public class TelaRelatorios extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 809, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1114, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -65,6 +69,11 @@ public class TelaRelatorios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbRelatorio;
+    public static javax.swing.JTable tbRelatorio;
     // End of variables declaration//GEN-END:variables
+    private void preencherTabelaRelatorios() {
+
+        RelatorioDAO relatorioDAO = new RelatorioDAO();
+        relatorioDAO.preencherRelatorio();
+    }
 }

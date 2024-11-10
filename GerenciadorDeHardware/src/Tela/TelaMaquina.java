@@ -31,6 +31,8 @@ public class TelaMaquina extends javax.swing.JFrame {
         bntPesquisar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         cbStatus = new javax.swing.JComboBox<>();
+        txtId = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -106,6 +108,14 @@ public class TelaMaquina extends javax.swing.JFrame {
             }
         });
 
+        txtId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Id");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,9 +159,12 @@ public class TelaMaquina extends javax.swing.JFrame {
                                                 .addGap(65, 65, 65))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(32, 32, 32)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(cbLabin, 0, 160, Short.MAX_VALUE)
-                                            .addComponent(cbStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(cbLabin, 0, 160, Short.MAX_VALUE)
+                                                .addComponent(cbStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(txtId))))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(169, 169, 169)
                                 .addComponent(jLabel4)))
@@ -185,9 +198,13 @@ public class TelaMaquina extends javax.swing.JFrame {
                     .addComponent(txtRAM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel6))
                 .addGap(5, 5, 5)
-                .addComponent(txtROM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtROM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bntSalvar)
@@ -240,7 +257,27 @@ public class TelaMaquina extends javax.swing.JFrame {
     }//GEN-LAST:event_cbLabinActionPerformed
 
     private void bntEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEditarActionPerformed
+                
+        String nome = txtNome.getText();
+        String cpu = txtCPU.getText();
+        String ram = txtRAM.getText();
+        String rom = txtROM.getText();
+        String labin = cbLabin.getSelectedItem().toString();
+        String status = cbStatus.getSelectedItem().toString();
+        int id = Integer.parseInt(txtId.getText());
+        MaquinaDTO MaqDTO = new MaquinaDTO();
 
+        MaqDTO.setNome(nome);
+        MaqDTO.setCpu(cpu);
+        MaqDTO.setRam(ram);
+        MaqDTO.setArmazenamento(rom);
+        MaqDTO.setLaboratorioNome(labin);
+        MaqDTO.setStatus(status);
+        MaqDTO.setId(id); 
+        
+        MaquinaDAO MaqDAO = new MaquinaDAO();
+        MaqDAO.editar(MaqDTO);
+        
     }//GEN-LAST:event_bntEditarActionPerformed
 
     private void bntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirActionPerformed
@@ -269,6 +306,10 @@ public class TelaMaquina extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cbStatusActionPerformed
 
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdActionPerformed
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -290,22 +331,25 @@ public class TelaMaquina extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     public static javax.swing.JTextField txtCPU;
+    public static javax.swing.JTextField txtId;
     public static javax.swing.JTextField txtNome;
     public static javax.swing.JTextField txtRAM;
     public static javax.swing.JTextField txtROM;
     // End of variables declaration//GEN-END:variables
 
     public static void chamarDados() {
-        MaquinaDAO maqDAO = new MaquinaDAO();
-        ResultSet rs = maqDAO.listarLabins();
-        try {
-        while (rs.next()) {
-            cbLabin.addItem(rs.getString(1));
-        }
-    } catch (SQLException erro) {
+        
+            MaquinaDAO maqDAO = new MaquinaDAO();
+            ResultSet rs = maqDAO.listarLabins();
+            try {
+            while (rs.next()) {
+                cbLabin.addItem(rs.getString(1));
+            }
+        } catch (SQLException erro) {
         JOptionPane.showMessageDialog(null, "hum2"+ erro.getMessage());
+        }
     }
-}
 }
