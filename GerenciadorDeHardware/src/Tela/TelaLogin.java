@@ -137,15 +137,15 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void BntEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BntEntrarActionPerformed
 
-        String login = txtUsuario.getText();
+        String nome = txtUsuario.getText();
         String senha = txtSenha.getText();
 
-        UsuarioDTO objusuarioDTO = new UsuarioDTO();
-        objusuarioDTO.setLogin_usuario(login);
-        objusuarioDTO.setSenha_usuario(senha);
+        UsuarioDTO UsuDTO = new UsuarioDTO();
+        UsuDTO.setNome(nome);
+        UsuDTO.setSenha(senha);
 
         UsuarioDAO objUsuarioDAO = new UsuarioDAO();
-        objUsuarioDAO.logar(objusuarioDTO);
+        objUsuarioDAO.logar(UsuDTO);
         
          
     }//GEN-LAST:event_BntEntrarActionPerformed

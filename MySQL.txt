@@ -29,11 +29,9 @@ CREATE TABLE Usuario (
 id INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(50),
 senha VARCHAR(50),
-perfil ENUM('tecnico', 'administrador')
+perfil ENUM('Técnico', 'Admin')
 );
 
-insert into Usuario(id, nome, senha, perfil)
-values(1, 'root', '123','administrador');
 
 SELECT 
     u.nome AS nome_tecnico,            
