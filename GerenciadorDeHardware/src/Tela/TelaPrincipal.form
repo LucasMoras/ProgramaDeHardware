@@ -104,11 +104,14 @@
     </Component>
     <Component class="javax.swing.JButton" name="bntCadastroCli">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cadastro de Usuarios"/>
+        <Property name="text" type="java.lang.String" value="Cadastro de Usu&#xe1;rios"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bntCadastroCliActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

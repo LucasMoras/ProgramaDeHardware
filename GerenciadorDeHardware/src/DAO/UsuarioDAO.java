@@ -5,6 +5,7 @@ import Tela.TelaPrincipal;
 import Tela.TelaUsuario;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class UsuarioDAO {
 
@@ -27,10 +28,34 @@ public class UsuarioDAO {
                 pst.close();
                 limparCampos();
                 JOptionPane.showMessageDialog(null, "Usuário inserido com sucesso! ");
+                pesquisaAuto();
             }
         } catch (SQLException erro) {
 
             JOptionPane.showMessageDialog(null, " Método Inserir " + erro);
+        }
+    }
+
+    public void pesquisaAuto() {
+
+        String sql = "select * from usuario";
+        conexao = ConexaoDAO.conector();
+
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) TelaUsuario.tbUsu.getModel();
+            model.setNumRows(0);
+
+            while (rs.next()) {
+                String id = rs.getString("Id");
+                String nome = rs.getString("nome");
+                String perfil = rs.getString("perfil");
+                model.addRow(new Object[]{id, nome, perfil});
+            }
+            conexao.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Método Pesquisar Automático " + e);
         }
     }
 
@@ -44,6 +69,7 @@ public class UsuarioDAO {
             int del = pst.executeUpdate();
             if (del > 0) {
                 JOptionPane.showMessageDialog(null, " Usuario deletado com sucesso!");
+                pesquisaAuto();
                 conexao.close();
                 limparCampos();
             }
@@ -74,54 +100,36 @@ public class UsuarioDAO {
         }
     }
 
-    public void pesquisar(UsuarioDTO UsuDTO) {
-        String sql = "select * from usuario where nome = ?";
-        conexao = ConexaoDAO.conector();
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, UsuDTO.getNome());
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                TelaUsuario.txtId.setText(rs.getString(1));
-                TelaUsuario.txtSenha.setText(rs.getString(3));
-                TelaUsuario.cbPerfil.setSelectedItem(rs.getString(4));
-                conexao.close();
-            } else {
-                JOptionPane.showMessageDialog(null, "Usuário não cadastrado!");
-                limparCampos();
-            }
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, " Método Pesquisar" + e);
-        }
-    }
 
     public void logar(UsuarioDTO UsuDTO) {
         String sql = "select * from Usuario where nome = ? and senha = ?";
         conexao = ConexaoDAO.conector();
 
         try {
+
             pst = conexao.prepareStatement(sql);
             pst.setString(1, UsuDTO.getNome());
             pst.setString(2, UsuDTO.getSenha());
-
             rs = pst.executeQuery();
 
             if (rs.next()) {
                 String perfil = rs.getString(4);
-                System.out.println(perfil);
 
-                TelaPrincipal principal = new TelaPrincipal();
-                principal.setVisible(true);
-                conexao.close();
-
+                if (perfil.equals("Técnico")) {
+                    TelaPrincipal principal = new TelaPrincipal();
+                    principal.setVisible(true);
+                    TelaPrincipal.bntCadastroCli.setEnabled(false);
+                    conexao.close();
+                } else {
+                    TelaPrincipal principal = new TelaPrincipal();
+                    principal.setVisible(true);
+                    conexao.close();
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário e/ou senha invalidos");
-
             }
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "tela Login" + erro);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "** tela Login ***" + e);
         }
     }
 

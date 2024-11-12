@@ -11,6 +11,24 @@ public class ManutencaoDAO {
     PreparedStatement pst = null;
     ResultSet rs = null;
 
+    public int getIdNome(String nome) {
+
+        String sql = "SELECT id FROM manutencao WHERE maquinaNome = ?";
+        conexao = ConexaoDAO.conector();
+
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, nome);
+            if (rs.next()) {
+                int getId;
+                getId = rs.getInt("id");
+            }
+        }  catch(SQLException erro){
+            
+        } 
+        return getId;
+    }
+    
     public void cadastrarManutencao(ManutencaoDTO manutencao) {
         String sql = "INSERT INTO Manutencao (maquinaNome, tecnicoNome, tipo, descricao) VALUES (?, ?, ?, ?)";
         conexao = ConexaoDAO.conector();
@@ -21,7 +39,7 @@ public class ManutencaoDAO {
             pst.setString(2, manutencao.getTecnicoNome());
             pst.setString(3, manutencao.getTipo());
             pst.setString(4, manutencao.getDescricao());
-            
+
             int add = pst.executeUpdate();
             if (add > 0) {
 
@@ -59,10 +77,12 @@ public class ManutencaoDAO {
         }
         return rs;
     }
-public void limparCampos() {
+
+    public void limparCampos() {
         TelaManutencao.txtDescricao.setText(null);
         TelaManutencao.cbNomeTec.setSelectedItem("Selecione");
         TelaManutencao.cbTipo.setSelectedItem("Selecione");
         TelaManutencao.cbNomeMaquina.setSelectedItem("Selecione");
     }
 }
+

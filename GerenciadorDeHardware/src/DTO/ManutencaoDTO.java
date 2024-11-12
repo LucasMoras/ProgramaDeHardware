@@ -3,7 +3,7 @@ package DTO;
 
 public class ManutencaoDTO {
 
-    private int id;
+    private static int id;
     private String TecnicoNome;
     private String maquinaNome;
     private String tipo;
@@ -16,14 +16,15 @@ public class ManutencaoDTO {
     public void setTecnicoNome(String TecnicoNome) {
         this.TecnicoNome = TecnicoNome;
     }
-    
-    public int getId() {
+
+    public static int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public static void setId(int id) {
+        ManutencaoDTO.id = id;
     }
+
 
     public String getMaquinaNome() {
         return maquinaNome;

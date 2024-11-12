@@ -50,7 +50,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        bntCadastroCli.setText("Cadastro de Usuarios");
+        bntCadastroCli.setText("Cadastro de Usuários");
         bntCadastroCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntCadastroCliActionPerformed(evt);
@@ -132,7 +132,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bntCadastroCli;
+    public static javax.swing.JButton bntCadastroCli;
     private javax.swing.JButton bntLabin;
     private javax.swing.JButton bntManutencao;
     private javax.swing.JButton bntMaquina;

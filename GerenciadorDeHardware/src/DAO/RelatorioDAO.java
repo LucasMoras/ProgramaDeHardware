@@ -1,5 +1,6 @@
 package DAO;
 
+import DTO.ManutencaoDTO;
 import Tela.TelaRelatorios;
 import java.sql.*;
 import javax.swing.JOptionPane;
@@ -13,7 +14,7 @@ public class RelatorioDAO {
 
     public void preencherRelatorio() {
         conexao = ConexaoDAO.conector();
-        
+
         DefaultTableModel modelo = new DefaultTableModel();
 
         modelo.addColumn("Nome do Técnico");
@@ -24,8 +25,8 @@ public class RelatorioDAO {
         modelo.addColumn("Nome do Laboratório");
         modelo.addColumn("Status da Máquina");
         modelo.addColumn("Tipo de Manutenção");
-        modelo.addColumn("Descrição da Manutenção");        
-        
+        modelo.addColumn("Descrição da Manutenção");
+
         String sql = "SELECT u.nome AS nome_tecnico, "
                 + "ma.nome AS nome_maquina, "
                 + "ma.processador AS processador, "
@@ -63,6 +64,24 @@ public class RelatorioDAO {
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao preencher relatório: " + erro.getMessage());
 
+        }
+    }
+
+    public void Excluir() {
+        
+        String sql = "delete from Manutencao where Id = ?";
+        conexao = ConexaoDAO.conector();
+
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setInt(1, ManutencaoDTO.getId());
+            int del = pst.executeUpdate();
+            if (del > 0) {
+                JOptionPane.showMessageDialog(null, " Manutenção deletada com sucesso!");
+                conexao.close();
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Método deletar " + e);
         }
     }
 }

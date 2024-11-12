@@ -145,8 +145,7 @@ public class TelaLogin extends javax.swing.JFrame {
         UsuDTO.setSenha(senha);
 
         UsuarioDAO objUsuarioDAO = new UsuarioDAO();
-        objUsuarioDAO.logar(UsuDTO);
-        
+        objUsuarioDAO.logar(UsuDTO);       
          
     }//GEN-LAST:event_BntEntrarActionPerformed
 
