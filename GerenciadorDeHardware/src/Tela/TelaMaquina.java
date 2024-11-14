@@ -10,6 +10,8 @@ public class TelaMaquina extends javax.swing.JFrame {
     public TelaMaquina() {
         initComponents();
         chamarDados();
+        MaquinaDAO maqDAO = new MaquinaDAO();
+        maqDAO.pesquisaAuto();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -33,7 +35,7 @@ public class TelaMaquina extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbMaq = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -110,18 +112,20 @@ public class TelaMaquina extends javax.swing.JFrame {
 
         jLabel6.setText("Id");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbMaq.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Id", "Nome", "CPU", "RAM", "ROM", "Laboratório", "Status"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tbMaq.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbMaqMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbMaq);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,6 +179,7 @@ public class TelaMaquina extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCPU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtRAM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,8 +291,30 @@ public class TelaMaquina extends javax.swing.JFrame {
     }//GEN-LAST:event_cbStatusActionPerformed
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtIdActionPerformed
+
+    private void tbMaqMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbMaqMouseClicked
+    
+        int linhaSel = tbMaq.getSelectedRow();
+        if (linhaSel != -1) {
+            String Id = tbMaq.getValueAt(linhaSel, 0).toString();
+            String nome = tbMaq.getValueAt(linhaSel, 1).toString();
+            String labinNome = tbMaq.getValueAt(linhaSel, 2).toString();
+            String cpu = tbMaq.getValueAt(linhaSel, 3).toString();
+            String ram = tbMaq.getValueAt(linhaSel, 4).toString();
+            String rom = tbMaq.getValueAt(linhaSel, 5).toString();
+            String status = tbMaq.getValueAt(linhaSel, 6).toString();
+
+            txtId.setText(Id);
+            txtNome.setText(nome);
+            txtCPU.setText(cpu);
+            txtRAM.setText(ram);
+            txtROM.setText(rom);
+            cbLabin.setSelectedItem(labinNome);
+            cbStatus.setSelectedItem(status);
+        }
+    }//GEN-LAST:event_tbMaqMouseClicked
 
     public static void main(String args[]) {
 
@@ -312,7 +339,7 @@ public class TelaMaquina extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public static javax.swing.JTable tbMaq;
     public static javax.swing.JTextField txtCPU;
     public static javax.swing.JTextField txtId;
     public static javax.swing.JTextField txtNome;

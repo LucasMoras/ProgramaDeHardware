@@ -5,6 +5,7 @@ import DTO.MaquinaDTO;
 import Tela.TelaMaquina;
 import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class MaquinaDAO {
 
@@ -27,7 +28,7 @@ public class MaquinaDAO {
 
             int add = pst.executeUpdate();
             if (add > 0) {
-
+                pesquisaAuto();
                 pst.close();
                 limparCampos();
                 JOptionPane.showMessageDialog(null, "Maquina inserida com sucesso! ");
@@ -37,6 +38,33 @@ public class MaquinaDAO {
         }
     }
 
+    public void pesquisaAuto() {
+
+        String sql = "select * from maquina";
+        conexao = ConexaoDAO.conector();
+
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) TelaMaquina.tbMaq.getModel();
+            model.setNumRows(0);
+
+            while (rs.next()) {
+                String id = rs.getString("Id");
+                String nome = rs.getString("nome");
+                String labNome = rs.getString("laboratorioNome");
+                String cpu = rs.getString("processador");
+                String ram = rs.getString("ram");
+                String rom = rs.getString("armazenamento");
+                String status = rs.getString("statuss");
+                model.addRow(new Object[]{id, nome, labNome, cpu, ram, rom, status});
+            }
+            conexao.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Método Pesquisar Automático " + e);
+        }
+    }
+    
     public void editar(MaquinaDTO maq1) {
         String sql = "update Maquina set nome = ?, processador = ?, ram = ?, armazenamento = ?, laboratorioNome = ?, statuss = ? where id = ?";
         conexao = ConexaoDAO.conector();
@@ -54,6 +82,7 @@ public class MaquinaDAO {
 
             if (add > 0) {
                 JOptionPane.showMessageDialog(null, "Maquina editada com sucesso!");
+                pesquisaAuto();
                 conexao.close();
                 limparCampos();
             }
@@ -77,34 +106,6 @@ public class MaquinaDAO {
         return rs;
     }
 
-    public void pesquisar(MaquinaDTO maquina) {
-
-        String sql = "select * from Maquina where nome = ?";
-        conexao = ConexaoDAO.conector();
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, maquina.getNome());
-            rs = pst.executeQuery();
-
-            if (rs.next()) {
-                TelaMaquina.txtNome.setText(rs.getString("nome"));
-                TelaMaquina.txtCPU.setText(rs.getString("processador"));
-                TelaMaquina.txtRAM.setText(rs.getString("ram"));
-                TelaMaquina.txtROM.setText(rs.getString("armazenamento"));
-                TelaMaquina.cbLabin.setSelectedItem(rs.getString("laboratorioNome"));
-                TelaMaquina.cbStatus.setSelectedItem(rs.getString("statuss"));
-                TelaMaquina.txtId.setText(rs.getString("id"));
-                conexao.close();
-            } else {
-                JOptionPane.showMessageDialog(null, "Maquina não cadastrada!");
-            }
-
-        } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, " Método Pesquisar" + e);
-        }
-    }
-
     public void deletar(MaquinaDTO ma1) {
         String sql = "delete from Maquina where nome = ?";
         conexao = ConexaoDAO.conector();
@@ -115,6 +116,7 @@ public class MaquinaDAO {
             int del = pst.executeUpdate();
             if (del > 0) {
                 JOptionPane.showMessageDialog(null, " Maquina deletada com sucesso!");
+                pesquisaAuto();
                 conexao.close();
                 limparCampos();
             }

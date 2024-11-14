@@ -26,7 +26,7 @@ public class ManutencaoDAO {
         }  catch(SQLException erro){
             
         } 
-        return getId;
+        return 0;
     }
     
     public void cadastrarManutencao(ManutencaoDTO manutencao) {
