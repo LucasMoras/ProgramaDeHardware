@@ -1,6 +1,5 @@
 package DAO;
 
-import DTO.ManutencaoDTO;
 import Tela.TelaRelatorios;
 import java.sql.*;
 import javax.swing.JOptionPane;
@@ -16,7 +15,8 @@ public class RelatorioDAO {
         conexao = ConexaoDAO.conector();
 
         DefaultTableModel modelo = new DefaultTableModel();
-
+        
+        modelo.addColumn("Id manutenção");
         modelo.addColumn("Nome do Técnico");
         modelo.addColumn("Nome da Máquina");
         modelo.addColumn("Processador");
@@ -27,25 +27,27 @@ public class RelatorioDAO {
         modelo.addColumn("Tipo de Manutenção");
         modelo.addColumn("Descrição da Manutenção");
 
-        String sql = "SELECT u.nome AS nome_tecnico, "
-                + "ma.nome AS nome_maquina, "
-                + "ma.processador AS processador, "
-                + "ma.ram AS ram, "
-                + "ma.armazenamento AS armazenamento, "
-                + "l.nome AS nome_laboratorio, "
-                + "ma.statuss AS status_maquina, "
-                + "m.tipo AS tipo_manutencao, "
-                + "m.descricao AS descricao_manutencao "
-                + "FROM Manutencao m "
-                + "INNER JOIN Maquina ma ON m.maquinaNome = ma.nome "
-                + "INNER JOIN Usuario u ON m.tecnicoNome = u.nome "
-                + "INNER JOIN Laboratorio l ON ma.laboratorioNome = l.nome";
+         String sql = "SELECT m.id AS id_manutencao, "
+            + "u.nome AS nome_tecnico, "
+            + "ma.nome AS nome_maquina, "
+            + "ma.processador AS processador, "
+            + "ma.ram AS ram, "
+            + "ma.armazenamento AS armazenamento, "
+            + "l.nome AS nome_laboratorio, "
+            + "ma.statuss AS status_maquina, "
+            + "m.tipo AS tipo_manutencao, "
+            + "m.descricao AS descricao_manutencao "
+            + "FROM Manutencao m "
+            + "INNER JOIN Maquina ma ON m.maquinaNome = ma.nome "
+            + "INNER JOIN Usuario u ON m.tecnicoNome = u.nome "
+            + "INNER JOIN Laboratorio l ON ma.laboratorioNome = l.nome";
 
         try {
             pst = conexao.prepareStatement(sql);
             rs = pst.executeQuery();
 
             while (rs.next()) {
+                int idManutencao = rs.getInt("id_manutencao");
                 String nomeTecnico = rs.getString("nome_tecnico");
                 String nomeMaquina = rs.getString("nome_maquina");
                 String processador = rs.getString("processador");
@@ -56,7 +58,7 @@ public class RelatorioDAO {
                 String tipoManutencao = rs.getString("tipo_manutencao");
                 String descricaoManutencao = rs.getString("descricao_manutencao");
 
-                modelo.addRow(new Object[]{nomeTecnico, nomeMaquina, processador, ram, armazenamento, nomeLaboratorio, statusMaquina, tipoManutencao, descricaoManutencao});
+                modelo.addRow(new Object[]{idManutencao, nomeTecnico, nomeMaquina, processador, ram, armazenamento, nomeLaboratorio, statusMaquina, tipoManutencao, descricaoManutencao});
             }
 
             TelaRelatorios.tbRelatorio.setModel(modelo);
@@ -64,24 +66,6 @@ public class RelatorioDAO {
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao preencher relatório: " + erro.getMessage());
 
-        }
-    }
-
-    public void Excluir() {
-        
-        String sql = "delete from Manutencao where Id = ?";
-        conexao = ConexaoDAO.conector();
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            pst.setInt(1, ManutencaoDTO.getId());
-            int del = pst.executeUpdate();
-            if (del > 0) {
-                JOptionPane.showMessageDialog(null, " Manutenção deletada com sucesso!");
-                conexao.close();
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, " Método deletar " + e);
         }
     }
 }

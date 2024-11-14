@@ -1,7 +1,8 @@
 package Tela;
 
+import DAO.ManutencaoDAO;
 import DAO.RelatorioDAO;
-import DTO.ManutencaoDTO;
+import javax.swing.JOptionPane;
 
 public class TelaRelatorios extends javax.swing.JFrame {
 
@@ -16,7 +17,7 @@ public class TelaRelatorios extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tbRelatorio = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        bntExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -25,11 +26,11 @@ public class TelaRelatorios extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Técnico", "Maquina", "CPU", "RAM", "ROM", "Laboratório", "Status", "Tipo de manutenção", "Descrição"
+                "Id", "Técnico", "Maquina", "CPU", "RAM", "ROM", "Laboratório", "Status", "Tipo de manutenção", "Descrição"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Long.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Long.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -37,12 +38,17 @@ public class TelaRelatorios extends javax.swing.JFrame {
             }
         });
         tbRelatorio.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tbRelatorio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbRelatorioMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbRelatorio);
 
-        jButton1.setText("Excluir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bntExcluir.setText("Excluir");
+        bntExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bntExcluirActionPerformed(evt);
             }
         });
 
@@ -53,17 +59,17 @@ public class TelaRelatorios extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1114, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1266, Short.MAX_VALUE)
+                    .addComponent(bntExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bntExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -71,15 +77,25 @@ public class TelaRelatorios extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        int Id_manu = ManutencaoDTO.getId();
-        ManutencaoDTO.setId(Id_manu);
-        
-        RelatorioDAO rlDAO = new RelatorioDAO();
-        rlDAO.Excluir();
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void bntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntExcluirActionPerformed
+
+        int linhaSelecionada = tbRelatorio.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+            int manutencaoId = (int) tbRelatorio.getValueAt(linhaSelecionada, 0);
+
+            ManutencaoDAO manutencaoDAO = new ManutencaoDAO();
+            manutencaoDAO.excluirManutencaoPorId(manutencaoId);
+            preencherTabelaRelatorios();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione uma manutenção para excluir.");
+        }
+    }//GEN-LAST:event_bntExcluirActionPerformed
+
+    private void tbRelatorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRelatorioMouseClicked
+
+
+    }//GEN-LAST:event_tbRelatorioMouseClicked
 
     public static void main(String args[]) {
 
@@ -91,7 +107,7 @@ public class TelaRelatorios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton bntExcluir;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable tbRelatorio;
     // End of variables declaration//GEN-END:variables

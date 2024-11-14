@@ -11,23 +11,6 @@ public class ManutencaoDAO {
     PreparedStatement pst = null;
     ResultSet rs = null;
 
-    public int getIdNome(String nome) {
-
-        String sql = "SELECT id FROM manutencao WHERE maquinaNome = ?";
-        conexao = ConexaoDAO.conector();
-
-        try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, nome);
-            if (rs.next()) {
-                int getId;
-                getId = rs.getInt("id");
-            }
-        }  catch(SQLException erro){
-            
-        } 
-        return 0;
-    }
     
     public void cadastrarManutencao(ManutencaoDTO manutencao) {
         String sql = "INSERT INTO Manutencao (maquinaNome, tecnicoNome, tipo, descricao) VALUES (?, ?, ?, ?)";
@@ -78,6 +61,31 @@ public class ManutencaoDAO {
         return rs;
     }
 
+    public void excluirManutencaoPorId(int id) {
+    String sql = "DELETE FROM Manutencao WHERE id = ?";
+    conexao = ConexaoDAO.conector();
+
+    try {
+        pst = conexao.prepareStatement(sql);
+        pst.setInt(1, id);
+        int deletado = pst.executeUpdate();
+        
+        if (deletado > 0) {
+            JOptionPane.showMessageDialog(null, "Manutenção excluída com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir manutenção.");
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Erro ao excluir manutenção: " + e.getMessage());
+    } finally {
+        try {
+            if (pst != null) pst.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao fechar recursos: " + e.getMessage());
+        }
+    }
+}
+    
     public void limparCampos() {
         TelaManutencao.txtDescricao.setText(null);
         TelaManutencao.cbNomeTec.setSelectedItem("Selecione");
